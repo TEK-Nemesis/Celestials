@@ -2,7 +2,7 @@
 
 Celestials is a test project designed to experiment with multi-platform game development using C++17, SDL3, and OpenGL. It serves as a sandbox for testing cross-platform compatibility, build systems, and rendering techniques on Windows and Linux. This project was created with the assistance of Grok, an AI developed by xAI, to streamline development and debugging.
 
-**Note**: This project is not planned for further development, as it was primarily a testbed for a future game release.  It may still include artficats from the game that is being worked on in parallel (though I tried to scrub most of the other game contents out).  This C++17 code still needs to be refined and cleaned up.  This version is just a functional draft that may simply be used for educational purposes.
+**Note**: This project is not planned for further development, as it was primarily a testbed for a future game release.  It may still include artficats from the game that is being worked on in parallel (though I tried to scrub most of the other game contents out).  The C++17 code still needs to be refined and cleaned up.  This version is just a functional draft that may simply be used for educational purposes.
 
 **Repository URL**: [https://github.com/TEK-Nemesis/Celestials](https://github.com/TEK-Nemesis/Celestials)
 
