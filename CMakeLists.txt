@@ -254,6 +254,8 @@ message(STATUS "Finding GLEW...")
 find_package(GLEW REQUIRED)
 if(GLEW_FOUND)
     message(STATUS "GLEW found: ${GLEW_LIBRARIES}")
+    # Explicitly include GLEW headers for the Celestials target
+    target_include_directories(Celestials PRIVATE ${GLEW_INCLUDE_DIRS})
 else()
     message(FATAL_ERROR "GLEW not found. Please install it using your package manager (e.g., 'sudo apt install libglew-dev' on Ubuntu).")
 endif()
