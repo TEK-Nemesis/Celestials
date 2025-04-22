@@ -41,22 +41,22 @@ Celestials offers a dynamic 3D environment where you can change the time of day,
 
 ### Linux
 
-- **Ubuntu 22.04 LTS** or a compatible distribution.
+- **Ubuntu 22.04 LTS** or a compatible distribution (e.g., Linux Mint based on Ubuntu 22.04).
 - **Build Tools**:
 
   ```
   sudo apt update
   sudo apt install -y build-essential cmake git
   ```
+
 - **Dependencies**:
-
-  ```
-  sudo apt install -y libgl1-mesa-dev libglu1-mesa-dev \
-      libsdl3-dev libsdl3-ttf-dev libsdl3-image-dev \
-      libfreetype6-dev libpng-dev libjpeg-dev zlib1g-dev
-  ```
-
-  Note: If SDL3 packages are not available in your package manager (since SDL3 is relatively new), you may need to build them from source. See the "Building SDL3 from Source on Linux" section below.
+  - Install the required development libraries for OpenGL and other dependencies:
+    ```
+    sudo apt install -y libgl1-mesa-dev libglu1-mesa-dev \
+        libfreetype6-dev libpng-dev libjpeg-dev zlib1g-dev \
+        libx11-dev libxext-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
+    ```
+  - **SDL3 Note**: SDL3, SDL3_ttf, and SDL3_image packages are not typically available in Ubuntu 22.04 LTS repositories because SDL3 is a relatively new version. You will likely need to build them from source. Follow the steps in the "Building SDL3 from Source on Linux" section below to install SDL3, SDL3_ttf, and SDL3_image.
 
 ## Cloning the Repository
 
@@ -183,7 +183,7 @@ Alternatively, you can download a ZIP file of the repository:
 
 ### Building SDL3 from Source on Linux
 
-If SDL3 packages are not available in your package manager, build them from source:
+SDL3, SDL3_ttf, and SDL3_image are not typically available in the Ubuntu 22.04 LTS package repositories because SDL3 is a relatively new version. You will need to build them from source:
 
 1. **SDL3**:
 
@@ -197,6 +197,8 @@ If SDL3 packages are not available in your package manager, build them from sour
    cd ../..
    ```
 
+   **Note**: If CMake fails with an error about missing X11 or Wayland development libraries (e.g., `SDL could not find X11 or Wayland development libraries on your system`), ensure you have installed the X11 development libraries as listed in the Prerequisites section (`libx11-dev`, etc.). See the Troubleshooting section for details.
+
 2. **SDL3_ttf**:
 
    ```
@@ -208,6 +210,8 @@ If SDL3 packages are not available in your package manager, build them from sour
    sudo make install
    cd ../..
    ```
+
+   **Note**: SDL3_ttf requires `libfreetype6-dev` to be installed. Ensure this dependency is met (see Prerequisites).
 
 3. **SDL3_image**:
 
@@ -221,6 +225,16 @@ If SDL3 packages are not available in your package manager, build them from sour
    cd ../..
    ```
 
+   **Note**: SDL3_image requires additional dependencies like `libpng-dev`, `libjpeg-dev`, and `zlib1g-dev`. Ensure these are installed (see Prerequisites).
+
+### Post-Installation Step
+
+After installing SDL3, SDL3_ttf, and SDL3_image, update the dynamic linker cache to ensure the libraries are found:
+
+```
+sudo ldconfig
+```
+
 ## Troubleshooting
 
 ### Windows
@@ -233,11 +247,51 @@ If SDL3 packages are not available in your package manager, build them from sour
 
 ### Linux
 
-- **Missing Dependencies**:
-  - If SDL3 or its extensions are missing, build them from source as described above.
-  - Ensure OpenGL 3.3 is supported: `glxinfo | grep "OpenGL version"`.
+- **Missing SDL3 Dependencies (SDL3_ttf, SDL3_image)**:
+  - If CMake fails with errors like `Could NOT find SDL3_ttf` or `Could NOT find SDL3_image`, it’s because these packages are not available in your package manager. Follow the "Building SDL3 from Source on Linux" section to build and install SDL3, SDL3_ttf, and SDL3_image from source.
+  - Ensure all required dependencies (`libfreetype6-dev`, `libpng-dev`, `libjpeg-dev`, `zlib1g-dev`) are installed before building SDL3_ttf and SDL3_image. Install them using:
+    ```
+    sudo apt install -y libfreetype6-dev libpng-dev libjpeg-dev zlib1g-dev
+    ```
+
+- **Missing X11 or Wayland Development Libraries**:
+  - If CMake fails with an error like `SDL could not find X11 or Wayland development libraries on your system` while building SDL3, you need to install the X11 development libraries. Install them using:
+    ```
+    sudo apt install -y libx11-dev libxext-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
+    ```
+  - After installing, clean and rebuild SDL3:
+    ```
+    cd SDL
+    rm -rf build
+    mkdir build && cd build
+    cmake ..
+    make -j$(nproc)
+    sudo make install
+    cd ../..
+    ```
+  - Then rebuild SDL3_ttf and SDL3_image, as they depend on SDL3.
+
+- **Missing OpenGL Development Libraries**:
+  - If CMake fails with an error indicating that OpenGL development libraries are missing (e.g., during dependency fetching), install the Mesa OpenGL development libraries:
+    ```
+    sudo apt install -y libgl1-mesa-dev libglu1-mesa-dev
+    ```
+  - Clean and rebuild the project:
+    ```
+    cd /path/to/Celestials/build
+    rm -rf *
+    cmake .. -DCMAKE_BUILD_TYPE=Debug
+    make -j$(nproc)
+    ```
+
 - **Resource Loading Errors**:
-  - Verify the `resources` folder is copied to the output directory (`out/x64-Debug/resources` or `out/x64-Release/resources`).
+  - Verify the `resources` folder is copied to the output directory (`out/x64-Debug/resources` or `out/x64-Release/resources`). The `CMakeLists.txt` should handle this automatically via the `add_custom_command` for copying resources. If resources are missing, manually copy them:
+    ```
+    cp -r /path/to/Celestials/resources out/x64-Debug/
+    ```
+
+- **General Build Failure**:
+  - If the build fails for other reasons, check the CMake output for specific error messages. Common issues include missing dependencies or network issues when downloading dependencies via `FetchContent`. Ensure your system has an active internet connection, as `FetchContent` downloads libraries like GLM and libnoise during the build process.
 
 ## Contributing
 
