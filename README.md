@@ -6,7 +6,7 @@ Celestials is a test project designed to experiment with multi-platform game dev
 
 **Repository URL**: [https://github.com/TEK-Nemesis/Celestials](https://github.com/TEK-Nemesis/Celestials)
 
-<img src="images/night_alien.jpg" alt="Alien Night" width="300">
+<img src="images/night_alien.jpg" alt="Alien Night" width="600">
 
 ## Project Overview
 
