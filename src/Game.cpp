@@ -22,7 +22,7 @@ bool Game::initialize() {
         return false;
     }
 
-    window = SDL_CreateWindow("Artillery Game 3D",
+    window = SDL_CreateWindow("Celestials",
         WINDOW_WIDTH, WINDOW_HEIGHT,
         SDL_WINDOW_OPENGL);
     if (!window) {
