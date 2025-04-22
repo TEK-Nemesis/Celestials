@@ -175,17 +175,17 @@ else()
         message(FATAL_ERROR "SDL3_ttf not found. Please install it using your package manager (e.g., 'sudo apt install libsdl3-ttf-dev' on Ubuntu).")
     endif()
 
+    # Link SDL3::SDL3-shared to the actual SDL3_ttf target (not the alias)
+    if(TARGET SDL3_ttf::SDL3_ttf-shared AND TARGET SDL3::SDL3-shared)
+        target_link_libraries(SDL3_ttf::SDL3_ttf-shared INTERFACE SDL3::SDL3-shared)
+    endif()
+
     # Create an alias for the system SDL3_ttf
     if(TARGET SDL3_ttf::SDL3_ttf-shared)
         add_library(SDL3_ttf ALIAS SDL3_ttf::SDL3_ttf-shared)
     else()
         message(FATAL_ERROR "SDL3_ttf::SDL3_ttf-shared target not found. Ensure SDL3_ttf is installed correctly.")
     endif()
-endif()
-
-# Ensure SDL3_ttf links to SDL3
-if(TARGET SDL3_ttf AND TARGET SDL3::SDL3-shared)
-    target_link_libraries(SDL3_ttf INTERFACE SDL3::SDL3-shared)
 endif()
 
 # Fetch SDL3_image as a shared library
