@@ -3,7 +3,7 @@
 #include <vector>
 #include <noise/noise.h>
 #include <glm/glm.hpp>
-#include <gl/glew.h>
+#include <GL/glew.h>
 
 class Terrain {
 public:

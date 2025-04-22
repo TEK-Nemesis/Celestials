@@ -249,20 +249,17 @@ set_target_properties(glm PROPERTIES
     MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
 )
 
-# Fetch GLEW
-message(STATUS "Fetching GLEW...")
-FetchContent_Declare(
-    glew
-    URL https://github.com/Perlmint/glew-cmake/archive/refs/tags/glew-cmake-2.2.0.zip
-    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-)
-set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build GLEW as a static library" FORCE)
-set(glew-cmake_BUILD_SHARED OFF CACHE BOOL "Build GLEW as a static library" FORCE)
-set(glew-cmake_BUILD_STATIC ON CACHE BOOL "Build GLEW static library" FORCE)
-FetchContent_MakeAvailable(glew)
-set_target_properties(libglew_static PROPERTIES
-    MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
-)
+# Find GLEW
+message(STATUS "Finding GLEW...")
+find_package(GLEW REQUIRED)
+if(GLEW_FOUND)
+    message(STATUS "GLEW found: ${GLEW_LIBRARIES}")
+    message(STATUS "GLEW_INCLUDE_DIRS: ${GLEW_INCLUDE_DIRS}")
+    # Explicitly include GLEW headers for the Celestials target
+    target_include_directories(Celestials PRIVATE ${GLEW_INCLUDE_DIRS})
+else()
+    message(FATAL_ERROR "GLEW not found. Please install it using your package manager (e.g., 'sudo apt install libglew-dev' on Ubuntu).")
+endif()
 
 # Fetch Box2D
 message(STATUS "Fetching Box2D...")
@@ -316,7 +313,7 @@ target_link_libraries(Celestials PRIVATE
     noise-static
     nlohmann_json
     glm::glm
-    libglew_static
+    GLEW::GLEW
     box2d
     imgui
 )
@@ -334,7 +331,6 @@ target_include_directories(Celestials PRIVATE
     include
     ${libnoise_SOURCE_DIR}/src
     ${sdl3_image_SOURCE_DIR}/include
-    ${glew_SOURCE_DIR}/include
 )
 
 # Copy shared libraries to the binary directory on Windows
