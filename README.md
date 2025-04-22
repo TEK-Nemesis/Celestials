@@ -26,11 +26,11 @@ Celestials offers a dynamic 3D environment where you can change the time of day,
 
 Here are some screenshots showcasing the dynamic 3D environment in Celestials:
 
-<img src="images/winter_day.jpg" alt="Earth/Milky Way Night Scene with Satellites" width="600">
+<img src="images/winter_day.jpg" alt="Earth/Milky Way Night Scene with Satellites" width="900">
 
-<img src="images/night_alien.jpg" alt="Alien Night Scene with Starships" width="600">
+<img src="images/night_alien.jpg" alt="Alien Night Scene with Starships" width="900">
 
-<img src="images/night_earth.jpg" alt="Earth Night Scene with Satellites" width="600">
+<img src="images/night_earth.jpg" alt="Earth Night Scene with Satellites" width="900">
 
 ## Attributions
 
