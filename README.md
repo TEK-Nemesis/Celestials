@@ -29,7 +29,7 @@ Celestials offers a dynamic 3D environment where you can change the time of day,
 - **sun.png**: Created by Love Mandala, sourced from [Vecteezy](https://www.vecteezy.com).
 - **moon.png**: Created by Ovidiu Timplaru.
 - **alien_planet.png**: Created by linearterra, sourced from [Vecteezy](https://www.vecteezy.com).
-- **klingon_piqad.ttf**: Kaiserzharkhan is the creator of the Klingon font.
+- **klingon_piqad.ttf**: Kaiserzharkhan is the creator of the Klingon font used in this project.
 
 ## Prerequisites
 
