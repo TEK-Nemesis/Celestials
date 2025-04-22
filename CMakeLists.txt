@@ -254,6 +254,7 @@ message(STATUS "Finding GLEW...")
 find_package(GLEW REQUIRED)
 if(GLEW_FOUND)
     message(STATUS "GLEW found: ${GLEW_LIBRARIES}")
+    message(STATUS "GLEW_INCLUDE_DIRS: ${GLEW_INCLUDE_DIRS}")
     # Explicitly include GLEW headers for the Celestials target
     target_include_directories(Celestials PRIVATE ${GLEW_INCLUDE_DIRS})
 else()
