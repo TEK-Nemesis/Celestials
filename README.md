@@ -6,7 +6,7 @@ Celestials is a test project designed to experiment with multi-platform game dev
 
 **Repository URL**: [https://github.com/TEK-Nemesis/Celestials](https://github.com/TEK-Nemesis/Celestials)
 
-<img src="images/day_alien.jpg" alt="Alien Day Scene showing Debug Menu" width="600">
+<img src="images/day_alien.jpg" alt="Alien Day Scene showing Debug Menu" width="900">
 
 ## Project Overview
 
@@ -26,11 +26,11 @@ Celestials offers a dynamic 3D environment where you can change the time of day,
 
 Here are some screenshots showcasing the dynamic 3D environment in Celestials:
 
-<img src="images/winter_day.jpg" alt="Earth/Milky Way Night Scene with Satellites" width="300">
+<img src="images/winter_day.jpg" alt="Earth/Milky Way Night Scene with Satellites" width="600">
 
-<img src="images/night_alien.jpg" alt="Alien Night Scene with Starships" width="300">
+<img src="images/night_alien.jpg" alt="Alien Night Scene with Starships" width="600">
 
-<img src="images/night_earth.jpg" alt="Earth Night Scene with Satellites" width="300">
+<img src="images/night_earth.jpg" alt="Earth Night Scene with Satellites" width="600">
 
 ## Attributions
 
