@@ -6,6 +6,10 @@ Celestials is a test project designed to experiment with multi-platform game dev
 
 **Repository URL**: [https://github.com/TEK-Nemesis/Celestials](https://github.com/TEK-Nemesis/Celestials)
 
+<img src="images/winter_day.jpg" alt="Winter Day" width="900">
+<img src="images/night_earth.jpg" alt="Earth Night" width="900">
+<img src="images/night_alien.jpg" alt="Alien Night" width="900">
+
 ## Project Overview
 
 Celestials offers a dynamic 3D environment where you can change the time of day, season, and even switch to alien scenes. The Earth/Milky Way night scene features over 50 real satellites, including the Starlink train and the International Space Station (ISS). The alien night scene replaces these with 50+ sci-fi starships, complete with tactical formations and smoke/propulsion trails. The project includes numerous real constellations (north, east, west, south views) with planets and shooting stars. Random 3D terrains are generated using Perlin noise heightmaps, and shaders are utilized for elements like the sky and sun.
@@ -248,7 +252,7 @@ sudo ldconfig
 ### Linux
 
 - **Missing SDL3 Dependencies (SDL3_ttf, SDL3_image)**:
-  - If CMake fails with errors like `Could NOT find SDL3_ttf` or `Could NOT find SDL3_image`, it’s because these packages are not available in your package manager. Follow the "Building SDL3 from Source on Linux" section to build and install SDL3, SDL3_ttf, and SDL3_image from source.
+  - If CMake fails with errors like `Could NOT find SDL3_ttf` or `Could NOT find SDL3_image`, itÂ’s because these packages are not available in your package manager. Follow the "Building SDL3 from Source on Linux" section to build and install SDL3, SDL3_ttf, and SDL3_image from source.
   - Ensure all required dependencies (`libfreetype6-dev`, `libpng-dev`, `libjpeg-dev`, `zlib1g-dev`) are installed before building SDL3_ttf and SDL3_image. Install them using:
     ```
     sudo apt install -y libfreetype6-dev libpng-dev libjpeg-dev zlib1g-dev
