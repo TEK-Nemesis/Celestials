@@ -219,10 +219,6 @@ target_link_libraries(noiseutils-static noise-static)
 set_target_properties(noise-static PROPERTIES
     MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
 )
-# Disable -Werror for noise-static to ignore uninitialized variable warnings
-target_compile_options(noise-static PRIVATE
-    $<$<CXX_COMPILER_ID:GNU>:-Wno-error=maybe-uninitialized>
-)
 set_target_properties(noiseutils-static PROPERTIES
     MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
 )
@@ -279,6 +275,10 @@ set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build Box2D as a static library" FORCE)
 FetchContent_MakeAvailable(box2d)
 set_target_properties(box2d PROPERTIES
     MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
+)
+# Disable -Werror for box2d to ignore uninitialized variable warnings
+target_compile_options(box2d PRIVATE
+    $<$<CXX_COMPILER_ID:GNU>:-Wno-error=maybe-uninitialized>
 )
 
 # Fetch ImGui
