@@ -11,8 +11,8 @@
 #define M_PI 3.14159265358979323846  
 #endif
 
-const int WINDOW_WIDTH = 1920; // 1548 or 3096
-const int WINDOW_HEIGHT = 1080; // 1296 or 1296
+const int WINDOW_WIDTH = 1728; // 90% of 1920
+const int WINDOW_HEIGHT = 972; // 90% of 1080
 
 const int INITIAL_PLAYER_COUNT = 2; // Initial number of players
 const float GRAVITY = 9.81f; // Gravity constant
