@@ -192,7 +192,7 @@ endif()
 message(STATUS "Fetching SDL3_image...")
 FetchContent_Declare(
     SDL3_image
-    URL https://github.com/libsdl-org/SDL_image/archive/refs/heads/main.zip
+    URL https://github.com/libsdl-org/SDL_image/releases/download/release-3.2.4/SDL3_image-3.2.4.zip
     DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 set(SDLIMAGE_VENDORED OFF CACHE BOOL "Disable vendored dependencies for SDL3_image" FORCE)
