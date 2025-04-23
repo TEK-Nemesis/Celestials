@@ -40,6 +40,41 @@ set "SLN_FILE=Celestials.sln"
 :: Set the working directory to the location of the batch file
 cd /d "%~dp0"
 
+echo.
+echo Searching for cmake.exe using the where command...
+echo.
+where cmake.exe
+echo.
+
+:: Use the where command to find cmake.exe
+for /f "tokens=*" %%i in ('where cmake.exe 2^>nul') do (
+    set "CMAKE_EXE=%%i"
+    goto :cmake_found
+)
+
+echo.
+path
+echo.
+
+:cmake_found
+if not defined CMAKE_EXE (
+    echo.
+    echo ERROR: cmake.exe not found in the system PATH.
+    echo.
+    echo Please ensure Visual Studio 2022 with CMake support is installed and cmake.exe is in the PATH.
+    goto :end
+)
+
+echo.
+echo Found cmake.exe at: %CMAKE_EXE%
+
+:: Check if CMakeLists.txt exists in the current directory
+if not exist "CMakeLists.txt" (
+    echo.
+    echo ERROR: CMakeLists.txt not found in the current directory.
+    goto :end
+)
+
 :: Set the source directory to the current directory
 set "SOURCE_DIR=%CD%"
 
@@ -58,6 +93,7 @@ echo Creating build directory...
 if not exist "%BUILD_DIR%" (
     mkdir "%BUILD_DIR%"
     if !ERRORLEVEL! neq 0 (
+        echo.
         echo ERROR: Failed to create build directory: %BUILD_DIR%
         goto :end
     )
@@ -69,6 +105,7 @@ echo Creating output directories...
 if not exist "%SOURCE_DIR%\out\x64-Debug" (
     mkdir "%SOURCE_DIR%\out\x64-Debug"
     if !ERRORLEVEL! neq 0 (
+        echo.
         echo ERROR: Failed to create output directory: %SOURCE_DIR%\out\x64-Debug
         goto :end
     )
@@ -76,6 +113,7 @@ if not exist "%SOURCE_DIR%\out\x64-Debug" (
 if not exist "%SOURCE_DIR%\out\x64-Release" (
     mkdir "%SOURCE_DIR%\out\x64-Release"
     if !ERRORLEVEL! neq 0 (
+        echo.
         echo ERROR: Failed to create output directory: %SOURCE_DIR%\out\x64-Release
         goto :end
     )
@@ -104,6 +142,7 @@ if exist "%MLINK_SLN_FILE%" (
 )
 mklink "%MLINK_SLN_FILE%" "%CMAKE_SLN_FILE%" || goto :mklink_error
 if exist "%MLINK_SLN_FILE%" (
+    echo.
     echo Solution linked successfully!
     echo Solution: %MLINK_SLN_FILE%
 ) else (
